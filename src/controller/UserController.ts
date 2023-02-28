@@ -8,6 +8,20 @@ export class UserController extends BaseController<User> {
         super(User)
     }
 
+    async craeteUser(request: Request) {
+        const {name, photo, email, password, confirmPassword, isRoot} = request.body;
+
+        super.isRequired(name, 'Informe o nome');
+        super.isRequired(photo, 'Informe a foto');
+        super.isRequired(email, 'Informe o email');
+        super.isRequired(password, 'Informe a senha');
+        super.isRequired(confirmPassword, 'Confirme a senha');
+
+        const _user = new User();
+
+        return super.save()
+    }
+
     async save(request: Request) {
         const user = <User>request.body;
         super.isRequired(user.name, 'O nome do usuário é obrigatório');
